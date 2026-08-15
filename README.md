@@ -20,5 +20,3 @@ New residential developments increasingly need to decide on PV layout early in t
 ## Tools
 Python · pvlib · NREL SAM · PVGIS · AutoCAD (site plan measurement)
 
-## Notes
-This was a team project (team of 3); this repo contains my contributions to the simulation and analysis pipeline.
