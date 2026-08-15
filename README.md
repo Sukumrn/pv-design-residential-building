@@ -1,6 +1,6 @@
 # Photovoltaic System Design Study — Residential New-Build, Fliegerhorst Quarter, Oldenburg
 
-University project (team of 3) for a real 14-unit residential building under construction in Oldenburg, Germany.
+University project for a real 14-unit residential building under construction in Oldenburg, Germany.
 
 ## Motivation
 New residential developments increasingly need to decide on PV layout early in the design process. This project compares multiple PV configurations for a real building to identify which layout maximizes energy yield and coverage of household demand, while accounting for German regulatory requirements.
