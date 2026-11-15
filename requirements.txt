@@ -1,8 +1,5 @@
 numpy
 pandas
-xarray
 matplotlib
 pvlib
 jupyterlab
-netCDF4
-cdsapi
