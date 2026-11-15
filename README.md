@@ -1,46 +1,107 @@
 # Photovoltaic Configuration Study — Residential Building, Fliegerhorst Oldenburg
 
-A collaborative university project examining photovoltaic layout options for a 14-unit residential development in Oldenburg, Germany.
+A collaborative university project examining photovoltaic (PV) layout options for a 14-unit residential development in Fliegerhorst, Oldenburg, Germany.
 
-## Objective
+The study compares candidate PV configurations across roof, wing and façade surfaces. It considers solar resource characteristics, modelled PV energy yield, orientation sensitivity and an indicative building electricity-demand profile.
 
-Compare candidate PV configurations for the building's roof, wing, and façade, considering annual energy production, specific yield, seasonal production, and an indicative household electricity-demand profile.
+## Project overview
 
-## Modelling workflow
+**Study location:** Melli-Beese-Ring 1, Fliegerhorst, Oldenburg, Germany  
+**Site coordinates:** 53.17295° N, 8.18185° E  
+**Building:** 14 residential units
 
-- Retrieve Typical Meteorological Year (TMY) weather data for the site from PVGIS using pvlib.
-- Calculate solar position and plane-of-array irradiance for candidate surface orientations.
-- Estimate module temperature using the Faiman model.
-- Estimate DC output with the pvlib PVWatts model and apply simplified system and inverter loss factors.
-- Compare south-facing, east–west, wing, and façade configurations.
-- Conduct tilt and azimuth sensitivity analyses.
-- Evaluate an indicative 29 kWp roof-and-wing scenario against an assumed household electricity-demand profile.
+The building geometry was interpreted from the supplied site plan, with measurements used to define candidate PV surfaces. The notebook then models the expected performance of different configurations using a PVGIS Typical Meteorological Year (TMY) weather dataset.
+
+## Analysis workflow
+
+1. Retrieve PVGIS TMY weather data for the project location using pvlib.
+2. Examine the horizontal solar resource and solar-position characteristics.
+3. Calculate plane-of-array irradiance for the candidate surface orientations.
+4. Estimate module temperature using the Faiman temperature model.
+5. Estimate PV DC output using the pvlib PVWatts model and simplified system/inverter loss factors.
+6. Compare south-facing, east–west, wing and façade configurations.
+7. Examine sensitivity to panel tilt and azimuth.
+8. Compare an indicative 29 kWp roof-and-wing scenario with an assumed household electricity-demand profile.
+
+## Selected figures
+
+### Solar resource and geometry
+
+**Daily horizontal irradiation**
+
+![Daily horizontal irradiation](figures/fig_daily_horizontal_irradiation.png)
+
+**Diffuse irradiance share**
+
+![Diffuse irradiance share](figures/fig_diffuse_share.png)
+
+**Solar path**
+
+![Solar path](figures/fig_solar_path.png)
+
+### PV configuration analysis
+
+**Monthly specific PV yield**
+
+![Monthly specific PV yield](figures/fig_monthly_specific_yield.png)
+
+**Tilt-angle sensitivity**
+
+![PV yield versus tilt angle](figures/fig_tilt_optimisation.png)
+
+**Azimuth sensitivity**
+
+![PV yield versus azimuth](figures/fig_azimuth_optimisation.png)
+
+**Indicative PV production and building demand**
+
+![PV production versus building electricity demand](figures/fig_production_vs_demand.png)
 
 ## Repository contents
 
-- `notebooks/pv_configuration_analysis.ipynb` — cleaned analysis notebook.
+- `notebooks/pv_configuration_analysis.ipynb` — Jupyter notebook containing the modelling workflow and analysis.
+- `figures/` — exported figures used in this README.
 - `requirements.txt` — Python package dependencies.
 
-## Run the notebook
+## Software and methods
+
+- Python
+- pvlib
+- pandas
+- NumPy
+- Matplotlib
+- PVGIS Typical Meteorological Year (TMY) data
+- AutoCAD site-plan measurements
+
+## Running the notebook
+
+Create and activate a Python virtual environment, install the dependencies, and launch JupyterLab:
 
 ```bash
 python -m venv .venv
+
+# Windows PowerShell
+.venv\\Scripts\\Activate.ps1
+
+# macOS / Linux
 source .venv/bin/activate
-# On Windows: .venv\Scripts\activate
+
 pip install -r requirements.txt
 jupyter lab
 ```
 
-The notebook retrieves TMY weather data from PVGIS at runtime, so an internet connection is required for the initial data request.
+Open `notebooks/pv_configuration_analysis.ipynb` from JupyterLab. The notebook retrieves TMY weather data from PVGIS at runtime, so an internet connection is required for that request.
 
-## Tools and methods
+## Assumptions and limitations
 
-Python · pvlib · pandas · NumPy · Matplotlib · PVGIS TMY · AutoCAD site-plan measurements
+This is an academic design study based on supplied site-plan geometry and modelling assumptions. Results depend on usable roof area, module packing density, surface orientation and tilt, weather-year selection, temperature coefficients, shading treatment and assumed system losses.
 
-## Important assumptions and limitations
+The household electricity-demand profile is an estimate for comparison, not measured consumption. The model does not establish actual self-consumption, grid export, storage dispatch or financial performance.
 
-This is an academic design study based on supplied site-plan geometry and model assumptions. Results depend on usable roof area, module packing density, orientation, tilt, weather-year selection, temperature coefficients, shading treatment, and assumed system losses.
+The analysis uses a pvlib/PVWatts-based workflow. It is not an NREL System Advisor Model (SAM) simulation or a cross-validation against SAM.
 
-The household demand profile is an estimate for comparison, not measured consumption. The model does not establish actual self-consumption, grid export, storage dispatch, or financial performance. The notebook uses a pvlib/PVWatts-based workflow; it should not be interpreted as an NREL SAM simulation or cross-validation.
+Total annual energy (kWh) and specific yield (kWh/kWp) are different metrics and should be interpreted with the corresponding system capacity and assumptions.
 
-Specific numerical comparisons should be quoted only with their corresponding system capacities and assumptions. Total annual energy and specific yield (kWh/kWp) are different comparison metrics.
+## Project context
+
+This work was completed collaboratively as part of a university project. The repository documents the analysis workflow and selected outputs; it should not be read as an attribution of the entire project to one individual.
